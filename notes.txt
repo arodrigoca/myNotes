@@ -1,0 +1,41 @@
+putting stock HC-05 in AT mode:
+
+Upload this code to an uno. Then, power the module holding the button (key pin). LED should flash every 2 seconds.
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(10, 11); // RX, TX
+
+void setup() {
+
+Serial.begin(9600);
+
+pinMode(9,OUTPUT); digitalWrite(9,HIGH);
+
+Serial.println("Enter AT commands:");
+
+mySerial.begin(38400);
+
+}
+
+void loop()
+
+{
+
+if (mySerial.available())
+
+Serial.write(mySerial.read());
+
+if (Serial.available())
+
+mySerial.write(Serial.read());
+
+}
+
+Just send AT commands.
+
+
+putting stock HC-06 in AT mode:
+
+use FTDI serial converter, connect everything and then open coolterm. Put baud rate at 9600. Terminal configured to CR&LF and then
+use the line mode in coolterm to send strings. Should work.
